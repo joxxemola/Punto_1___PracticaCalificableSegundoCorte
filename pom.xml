@@ -10,7 +10,7 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>Mundial de Ciclismo de Pista – Cali</name>
+    <name>Punto_1___PracticaCalificableSegundoCorte</name>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
