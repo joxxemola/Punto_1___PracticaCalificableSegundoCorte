@@ -1,4 +1,4 @@
-package Main;
+package co.cali.ciclismo; 
 
 import model.CiclistaEquipo;
 import model.CiclistaPista;
