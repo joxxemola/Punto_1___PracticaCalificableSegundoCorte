@@ -19,15 +19,14 @@
         <exec.mainClass>co.cali.ciclismo.Main</exec.mainClass>
     </properties>
 
-    <dependencies>
-        <!-- JUnit 5 para tests unitarios e integración -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+ <dependencies>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter</artifactId>
+        <version>5.10.2</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
 
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
