@@ -1,15 +1,14 @@
 package modelo;
 
 public class Competidor {
-    private String nombre;
-    private int edad;
-    private String pais;
-    private int rankingMundial;
-    private double estatura;
-    private double peso;
-    private int puntos;
+    protected String nombre;
+    protected int edad;
+    protected String pais;
+    protected int rankingMundial;
+    protected double estatura;
+    protected double peso;
+    protected int puntos;
 
-    // Constructor
     public Competidor(String nombre, int edad, String pais, int rankingMundial, double estatura, double peso) {
         this.nombre = nombre;
         this.edad = edad;
@@ -20,52 +19,37 @@ public class Competidor {
         this.puntos = 0;
     }
 
-    // Método original del diagrama
+    // Sobrecarga de método 1: actualizar ranking con solo puntos
     public void actualizarRanking(int puntosObtenidos) {
         this.puntos += puntosObtenidos;
-        this.rankingMundial -= (puntosObtenidos / 10);
-        if (this.rankingMundial < 1) {
-            this.rankingMundial = 1;
-        }
+        // Lógica simple: cada 100 puntos mejora 1 posición en ranking
+        this.rankingMundial = Math.max(1, rankingMundial - (puntosObtenidos / 100));
     }
 
-    // SOBRECARGA 1: actualizarRanking con dos parámetros
-    public void actualizarRanking(int puntosObtenidos, boolean esTorneoMayor) {
-        int factor = esTorneoMayor ? 2 : 1;
-        actualizarRanking(puntosObtenidos * factor);
-    }
-
-    // SOBRECARGA 2 con ESTRUCTURA ANIDADA (clase interna local)
-    public void actualizarRanking(int puntosObtenidos, String categoria, double coeficiente) {
-        // Estructura anidada: clase interna local
-        class CalculadorPuntos {
-            private int puntosBase;
-            
-            public CalculadorPuntos(int puntos) {
-                this.puntosBase = puntos;
-            }
-            
-            public int calcularPuntosFinales() {
-                int puntosFinales = (int)(puntosBase * coeficiente);
-                if (categoria.equals("ELITE")) {
-                    puntosFinales += 10;
-                } else if (categoria.equals("JUNIOR")) {
-                    puntosFinales += 5;
-                }
-                return puntosFinales;
+    // Sobrecarga de método 2: actualizar ranking con puntos y bono especial (estructura anidada)
+    public void actualizarRanking(int puntosObtenidos, boolean esFinalMundial) {
+        int bono = 0;
+        if (esFinalMundial) {
+            // Estructura anidada: switch dentro de if
+            switch (puntosObtenidos / 50) {
+                case 0 -> bono = 5;
+                case 1 -> bono = 10;
+                case 2 -> bono = 15;
+                default -> bono = 20;
             }
         }
-        
-        CalculadorPuntos calculador = new CalculadorPuntos(puntosObtenidos);
-        int puntosFinales = calculador.calcularPuntosFinales();
-        actualizarRanking(puntosFinales);
+        actualizarRanking(puntosObtenidos + bono);
     }
 
-    // Método del diagrama
+    // Método que será sobreescrito
     public String obtenerDatos() {
-        return nombre + " | Edad: " + edad + " | País: " + pais + 
-               " | Ranking Mundial: #" + rankingMundial + 
-               " | Estatura: " + estatura + "m | Peso: " + peso + "kg | Puntos: " + puntos;
+        return String.format("Nombre: %s | Edad: %d | País: %s | Ranking: %d | Estatura: %.2f m | Peso: %.2f kg | Puntos: %d",
+                nombre, edad, pais, rankingMundial, estatura, peso, puntos);
+    }
+
+    @Override
+    public String toString() {
+        return obtenerDatos();
     }
 
     // Getters y Setters
@@ -83,10 +67,4 @@ public class Competidor {
     public void setPeso(double peso) { this.peso = peso; }
     public int getPuntos() { return puntos; }
     public void setPuntos(int puntos) { this.puntos = puntos; }
-
-    // SOBREESCRITURA del método toString
-    @Override
-    public String toString() {
-        return obtenerDatos();
-    }
 }
