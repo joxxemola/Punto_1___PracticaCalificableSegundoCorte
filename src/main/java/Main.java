@@ -1,3 +1,5 @@
+package co.cali.ciclismo;
+
 import modelo.*;
 import vista.VistaCompetencia;
 import controlador.ControladorCompetencia;

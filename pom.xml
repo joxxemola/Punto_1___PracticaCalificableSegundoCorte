@@ -10,13 +10,13 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>Punto_1___PracticaCalificableSegundoCorte</name>
+    <name>Mundial de Ciclismo de Pista - Cali</name>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.release>17</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.10.2</junit.version>
+        <exec.mainClass>co.cali.ciclismo.Main</exec.mainClass>
     </properties>
 
     <dependencies>
@@ -34,6 +34,8 @@
         <testSourceDirectory>src/test/java</testSourceDirectory>
 
         <plugins>
+
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -43,6 +45,7 @@
                 </configuration>
             </plugin>
 
+            <!-- Exec plugin: necesario para que NetBeans encuentre Main -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -52,12 +55,14 @@
                 </configuration>
             </plugin>
 
+            <!-- Surefire para correr los tests con JUnit 5 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
             </plugin>
 
+            <!-- JAR ejecutable con Main como clase principal -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -70,6 +75,8 @@
                     </archive>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
+
 </project>
